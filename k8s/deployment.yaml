@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: websocket-chat-server
-        image: 324547056370.dkr.ecr.ap-northeast-2.amazonaws.com/websocket-chat-server:latest
+        image: 324547056370.dkr.ecr.ap-northeast-2.amazonaws.com/websocket-chat-server:v10
         ports:
         - containerPort: 8080
         resources:
