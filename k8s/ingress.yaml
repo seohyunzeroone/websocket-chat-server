@@ -11,8 +11,12 @@ metadata:
     alb.ingress.kubernetes.io/scheme: internet-facing
     ## IP 타입 타겟
     alb.ingress.kubernetes.io/target-type: ip
-    ## 리스닝 포트
-    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP":80}]'
+    ## HTTPS 443 포트
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443}]'
+    ## ACM 인증서
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:ap-northeast-2:324547056370:certificate/6a1a0fc9-de7f-41a0-a7d5-1a734dc5d24f
+    ## HTTP → HTTPS 리다이렉트
+    alb.ingress.kubernetes.io/ssl-redirect: "443"
     ## 헬스체크 경로
     alb.ingress.kubernetes.io/healthcheck-path: /chat/health
 spec:
