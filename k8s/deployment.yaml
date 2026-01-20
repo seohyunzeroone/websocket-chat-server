@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: websocket-chat-server
+  namespace: default
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: websocket-chat-server
+  template:
+    metadata:
+      labels:
+        app: websocket-chat-server
+    spec:
+      containers:
+      - name: websocket-chat-server
+        image: 324547056370.dkr.ecr.ap-northeast-2.amazonaws.com/websocket-chat-server:latest
+        ports:
+        - containerPort: 8080
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"

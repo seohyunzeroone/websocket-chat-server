@@ -1,0 +1,29 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: websocket-chat-ingress
+  namespace: default
+  annotations:
+    kubernetes.io/ingress.class: alb
+    ## ALB 그룹 - 같은 그룹이면 하나의 ALB 공유
+    alb.ingress.kubernetes.io/group.name: one-api-alb
+    ## 인터넷 노출
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    ## IP 타입 타겟
+    alb.ingress.kubernetes.io/target-type: ip
+    ## 리스닝 포트
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP":80}]'
+    ## 헬스체크 경로
+    alb.ingress.kubernetes.io/healthcheck-path: /chat/health
+spec:
+  rules:
+  - http:
+      paths:
+      ## Path 기반 라우팅
+      - path: /chat
+        pathType: Prefix
+        backend:
+          service:
+            name: websocket-chat-server
+            port:
+              number: 80
